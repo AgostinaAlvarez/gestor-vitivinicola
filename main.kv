@@ -1,0 +1,205 @@
+<CustomLabel>:
+    #text: 'Tareas programadas para hoy'
+    #color=(0, 0, 0, 1)
+    size_hint: 1, None
+    padding: dp(10), 0, 0, 0
+    font_size: dp(16)
+    text_size: self.width, None
+    halign: 'left'
+    canvas.before:
+        Color:
+            rgba: 0.34, 0.15, 0.44, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+<HeaderScreen>:
+    orientation: 'horizontal'
+    spacing:dp(10)
+    padding: dp(15), 0, 0 , 0
+    size_hint: 1,None
+    height: dp(100)
+    canvas.before:
+        Color:
+            rgba: 0.34, 0.15, 0.44, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    MDIcon:
+        icon:'home'
+        size_hint:None,1
+        font_size: dp(27)
+        pos_hint: {'center_y': 0.5}
+
+    Label:
+        text: 'Home Screen'
+        color: 0,0,0,1
+        font_size: dp(25)
+        size_hint: None,1
+        width: self.texture_size[0] if self.text else 0
+
+
+<TareaCard>:
+    orientation: 'vertical'
+    size_hint: .7, None
+    pos_hint: {'center_x': 0.5}
+    height : dp(150)
+    canvas.before:
+        Color:
+            rgba: 0.34, 0.15, 0.44, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+
+<HomeScreen>:
+    orientation: 'vertical'
+    spacing: dp(10)
+
+<ScrollHome@ScrollView>:
+    HomeScreen:
+        size_hint:1, None
+        height: self.minimum_height
+
+
+<ViniedoScreen>
+
+<ViniedoScrInit>:
+    orientation: 'vertical'
+    spacing: dp(10)
+    size_hint:1, None
+    height: self.minimum_height
+
+#PRIMERA SCREEN
+<ViniedosScreenList>:
+    orientation: 'vertical'
+    spacing: dp(10)
+    size_hint:1, None
+    height: self.minimum_height
+
+#box layout para los scrolls
+
+#PARTE DE LOS VINIEDOS
+<ContainerBLScr>:
+    orientation: 'vertical'
+    spacing: dp(10)
+    size_hint:1, None
+    height: self.minimum_height
+
+<CardViniedo>:
+    size_hint: None,None
+    width: dp(500)
+    height: dp(150)
+    padding: 0,dp(20),0,dp(10)
+    orientation: 'vertical'
+    pos_hint: {'center_x': 0.5}
+    canvas.before:
+        Color:
+            rgba: 0.34, 0.15, 0.44, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+<HeaderViniedo>:
+    orientation: 'horizontal'
+    spacing:dp(10)
+    padding: dp(15), 0, 0 , 0
+    size_hint: 1,None
+    height: dp(100)
+    canvas.before:
+        Color:
+            rgba: 0.34, 0.15, 0.44, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    MDIcon:
+        icon:'land-plots'
+        size_hint:None,1
+        font_size: dp(27)
+        pos_hint: {'center_y': 0.5}
+
+    Label:
+        id: my_label
+        text: 'Vinedos'
+        color: 0,0,0,1
+        font_size: dp(25)
+        size_hint: None,1
+        width: self.texture_size[0] if self.text else 0
+
+
+
+
+#DISENIO GENERAL
+<MainScreen>
+    orientation: 'horizontal'
+    BoxLayout:
+        text:'lado a'
+        size_hint: None,1
+        width: dp(230)
+        orientation: 'vertical'
+        Label:
+            size_hint: 1,None
+            height: dp(30)
+        Button:
+            text:'Home'
+            size_hint: 1,None
+            on_release: root.switch_screen('scr_home')
+        Button:
+            text:'Viñedos y parcelas'
+            size_hint: 1,None
+            on_release: root.switch_screen('scr_vnypr')
+        Button:
+            text:'Cultivos'
+            size_hint: 1,None
+            on_release: root.switch_screen('scr_cultivos')
+        Button:
+            text:'Inventario'
+            size_hint: 1,None
+            on_release: root.switch_screen('scr_inventario')
+        Button:
+            text:'Registro Ambiental'
+            size_hint: 1,None
+            on_release: root.switch_screen('scr_rgamb')
+            background_color: 1,0,1,1
+
+
+        BoxLayout:
+    BoxLayout:
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        ScreenManager:
+            id: scr_mngr
+            Screen:
+                name: 'scr_home'
+                ScrollHome
+            Screen:
+                name: 'scr_vnypr'
+                ViniedoScreen
+
+
+
+            Screen:
+                name: 'scr_cultivos'
+                Label:
+                    text: "Home Cultivos"
+                    color: 1, 0, 0, 1  # Color rojo para el texto
+
+            Screen:
+                name: 'scr_inventario'
+                Label:
+                    text: "Home Invenntario"
+                    color: 1, 0, 0, 1  # Color rojo para el texto
+            Screen:
+                name: 'scr_rgamb'
+                Label:
+                    text: "Home Registro Ambiental"
+                    color: 1, 0, 0, 1  # Color rojo para el texto
