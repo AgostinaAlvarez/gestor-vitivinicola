@@ -11,10 +11,10 @@ from kivy.uix.scrollview import ScrollView
 import uuid
 from api.api import get_parcelas_by_viniedo, datos_viniedos
 from database.db import connect_to_db
-
 from kivy.garden.matplotlib.backend_kivyagg import FigureCanvasKivyAgg
-
 import matplotlib.pyplot as plt
+from kivy.uix.stacklayout import StackLayout
+
 
 class ScrollView(ScrollView):
     pass
@@ -104,7 +104,6 @@ class ViniedoScreen(Screen):
         scr_vnd_list.add_widget(box_scroll_1)
 
         # Pantalla 2: scr_vnd_detail
-
         self.scr_vnd_detail = Screen(name='scr_vnd_detail')
 
         box_layout_2 = ContainerBLScr()
@@ -120,13 +119,25 @@ class ViniedoScreen(Screen):
 
         btnt = Button(text='test', size_hint=(1, None), height=dp(30))
 
+        #layout grid:
+
+        gridParcelas = StackLayout()
+
+        for i in range(0, 10):
+            btnGrid = Button(text=str(i+1),size_hint=(None,None),height=dp(300),width=dp(250))
+            gridParcelas.add_widget(btnGrid)
+
         box_layout_2.add_widget(btn_go_back)
         box_layout_2.add_widget(self.header_name)
         box_layout_2.add_widget(self.label_name)
         box_layout_2.add_widget(self.label_ubi)
         box_layout_2.add_widget(self.label_sup)
+
+
         box_layout_2.add_widget(self.layoutCanv)
         box_layout_2.add_widget(btnt)
+
+
 
 
         self.box_scroll_2 = ScrollView()
@@ -220,6 +231,11 @@ class ViniedoScreen(Screen):
                 self.label_ubi.text = f"{localidad} - {provincia}"
                 break
         self.sm.current = 'scr_vnd_detail'
+
+
+    def show_parcela_detail(self,identificador):
+        print('parcela')
+
 
     def switch_screen_vnd(self, instance):
         self.sm.current = 'scr_vnd_list'

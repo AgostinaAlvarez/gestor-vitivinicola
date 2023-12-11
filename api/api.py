@@ -61,3 +61,52 @@ def datos_viniedos(connection,viniedo_id):
             return []
     else:
         return []
+
+
+def datos_parcela_prueba(connection,parcela_id):
+    if connection:
+        try:
+            cursor = connection.cursor()
+            query = 'select suelos.nombre,suelos.descripcion,suelos.composicion,suelos.drenaje,suelos.pH,suelos.retencionAgua,suelos.texturaSuelo,suelos.capacidadAireacion,suelos.propiedadesViticultura from suelos inner join tipoDeSueloParcela on suelos.id = tipoDeSueloParcela.id_suelo where tipoDeSueloParcela.id_parcela = %s'
+            cursor.execute(query, (parcela_id,))
+            data = cursor.fetchall()
+            cursor.close()
+            return data
+        except mysql.connector.Error as err:
+            print(f"Error al consultar a la base de datos: {err}")
+            return []
+    else:
+        return []
+
+
+def datos_parcela(connection,parcela_id):
+    if connection:
+        try:
+            cursor = connection.cursor()
+
+            # Ejecutar la primera consulta
+            cursor.execute('select suelos.nombre,suelos.descripcion,suelos.composicion,suelos.drenaje,suelos.pH,suelos.retencionAgua,suelos.texturaSuelo,suelos.capacidadAireacion,suelos.propiedadesViticultura from suelos inner join tipoDeSueloParcela on suelos.id = tipoDeSueloParcela.id_suelo where tipoDeSueloParcela.id_parcela = %s',(parcela_id,))
+            suelos = cursor.fetchall()
+
+            # Ejecutar la segunda consulta
+            cursor.execute('SELECT tareas.nombre_tarea, tareas.descripcion, tareas.fecha_creacion, tareas.fecha_limite, tareas.estado FROM tareas')
+            tareas = cursor.fetchall()
+
+            cursor.close()
+
+            # Retornar los resultados en un diccionario
+            return {
+                "suelos": suelos,
+                "tareas": tareas
+            }
+
+        except mysql.connector.Error as err:
+            print(f"Error al consultar a la base de datos: {err}")
+            return []
+    else:
+        return []
+
+#select suelos.nombre,suelos.descripcion,suelos.composicion,suelos.drenaje,suelos.pH,suelos.retencionAgua,suelos.texturaSuelo,suelos.capacidadAireacion,suelos.propiedadesViticultura from suelos inner join tipoDeSueloParcela on suelos.id = tipoDeSueloParcela.id_suelo where tipoDeSueloParcela.id_parcela = "53f1b371-1045-447a-ab8e-cdb4c93b6b04";
+
+#nombre, descripcion, composicion, drenaje, pH, retencionAgua, texturaSuelo, capacidadAireacion, propiedadesViticultura
+

@@ -1,0 +1,113 @@
+#Componentes
+<BoxLytComponent>
+    orientation: 'vertical'
+    size_hint:1, None
+    height: self.minimum_height
+
+<StackComponent>
+    spacing: dp(10)
+    padding: dp(10),dp(10),dp(10),dp(10)
+    size_hint:1, None
+    height: self.minimum_height
+
+<HeaderComponent>
+    size_hint: 1,None
+    orientation:'horizontal'
+    spacing: dp(10)
+    padding: dp(15), 0, 0, 0
+    height: dp(100)
+    canvas.before:
+        Color:
+            rgba: 0.34, 0.15, 0.44, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    MDIcon:
+        id: header_icon
+        size_hint: None,1
+        font_size: dp(30)
+        pos_hint: {'center_y': 0.5}
+    Label:
+        id: header_label
+        color: 0,0,0,1
+        font_size: dp(25)
+        size_hint: None,1
+        width: self.texture_size[0] if self.text else 0
+
+
+#Estructura general
+<MainScreen>
+    orientation: 'horizontal'
+
+    #Menu Lateral
+    BoxLayout:
+        size_hint: None,1
+        width: dp(230)
+        orientation: 'vertical'
+
+        Button:
+            text: 'Home'
+            on_release: root.switch_screen('home_screen')
+        Button:
+            text:'Viñedos y parcelas'
+            on_release: root.switch_screen('viniedo_screen')
+        Button:
+            text:'Cultivos'
+        Button:
+            text:'Inventario'
+        Button:
+            text:'Registro ambiental'
+
+    #Contenido de la pantalla
+    BoxLayout:
+        ScreenManager:
+            id: screen_manager
+            HomeScreen:
+                name: 'home_screen'
+            ViniedosScreen:
+                name: 'viniedo_screen'
+
+
+
+<HomeScreen>
+
+<HomeScreennTaskCard>
+    orientation: 'vertical'
+    size_hint: 1,None
+    height: self.minimum_height
+    padding: dp(10),dp(10),dp(10),dp(10)
+    canvas.before:
+        Color:
+            rgba: 0.34, 0.15, 0.44, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<ViniedosScreen>
+
+<ViniedoCard>
+    orientation: 'vertical'
+    size_hint: None,None
+    width: dp(300)
+    height: self.minimum_height
+    padding: dp(10),dp(20),dp(10),dp(20)
+    canvas.before:
+        Color:
+            rgba: 0.34, 0.15, 0.44, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+<ViniedoDetail>
+    orientation: 'vertical'
+    size_hint: None,None
+    width: dp(300)
+    height: self.minimum_height
+    padding: dp(10),dp(20),dp(10),dp(20)
+    canvas.before:
+        Color:
+            rgba: 0.34, 0.15, 0.44, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
