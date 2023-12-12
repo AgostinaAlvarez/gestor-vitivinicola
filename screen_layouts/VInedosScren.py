@@ -124,6 +124,8 @@ class ViniedosScreen (Screen):
 
         #Esto es lo q va despues:
         btnTest = Button(text="boton de pueba",size_hint=(1,None),height=dp(50))
+
+
         self.detail_screen_box_lyt.add_widget(btnTest)
 
         #listado de parcelas
@@ -150,6 +152,8 @@ class ViniedosScreen (Screen):
 
             ],
         )
+
+
         self.detail_screen_box_lyt.add_widget(self.detail_screen_data_tables)
 
 
@@ -176,6 +180,9 @@ class ViniedosScreen (Screen):
 
         self.landTypes = StackComponent()
 
+        btnParcela = Button(text="Actividades parcela",size_hint=(1,None),height=dp(50))
+
+
         self.actividadesParcelas = MDDataTable(
             size_hint=(.9, None),
             pos_hint={'center_x': 0.5},
@@ -185,7 +192,6 @@ class ViniedosScreen (Screen):
             # name column, width column, sorting function column(optional), custom tooltip
             column_data=[
                 ("Descripcion", dp(60)),
-                ("Detalle", dp(60)),
                 ("Fecha Inicio", dp(40)),
                 ("Fecha Finalizacion", dp(40)),
                 ("Estado", dp(30))
@@ -200,6 +206,7 @@ class ViniedosScreen (Screen):
         self.parcela_screen_box_lyt.add_widget(self.parcela_screen_ubi)
         self.parcela_screen_box_lyt.add_widget(self.parcela_screen_sup)
         self.parcela_screen_box_lyt.add_widget(self.landTypes)
+        self.parcela_screen_box_lyt.add_widget(btnParcela)
         self.parcela_screen_box_lyt.add_widget(self.actividadesParcelas)
 
 

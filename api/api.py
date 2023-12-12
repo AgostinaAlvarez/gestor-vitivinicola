@@ -89,7 +89,7 @@ def datos_parcela(connection,parcela_id):
             suelos = cursor.fetchall()
 
             # Ejecutar la segunda consulta
-            cursor.execute('SELECT tareas.nombre_tarea, tareas.descripcion, tareas.fecha_creacion, tareas.fecha_limite, tareas.estado FROM tareas')
+            cursor.execute('SELECT tareas.nombre_tarea, tareas.fecha_creacion, tareas.fecha_limite, tareas.estado FROM tareas')
             tareas = cursor.fetchall()
 
             cursor.close()
